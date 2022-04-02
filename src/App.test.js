@@ -1,8 +1,11 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render, screen } from "@testing-library/react";
+import App from "./App";
 
-test('renders learn react link', () => {
+test("render calculation App", () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const ACDigit = screen.getByText(/AC/);
+  const DELDigit = screen.getByText(/DEL/);
+
+  expect(ACDigit).toBeInTheDocument();
+  expect(DELDigit).toBeInTheDocument();
 });
