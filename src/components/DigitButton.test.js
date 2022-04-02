@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import DigitButton from "./DigitButton";
-import { ACTIONS } from "../App";
+import { ACTIONS } from "../const/const";
 
 test("render DigitButton content", () => {
   const digit = "0";

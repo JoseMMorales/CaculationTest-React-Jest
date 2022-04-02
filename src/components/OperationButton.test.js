@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import OperationButton from "./OperationButton";
-import { ACTIONS } from "../App";
+import { ACTIONS } from "../const/const";
 
 test("render OperationButton content", () => {
   const digit = "0";

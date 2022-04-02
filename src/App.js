@@ -2,14 +2,7 @@ import { useReducer } from "react";
 import "./App.css";
 import DigitButton from "./components/DigitButton";
 import OperationButton from "./components/OperationButton";
-
-export const ACTIONS = {
-  ADD_DIGIT: "add-digit",
-  CHOOSE_OPERATION: "choose-operation",
-  CLEAR: "clear",
-  DELETE_DIGIT: "delete-digit",
-  EVALUATE: "evaluate",
-};
+import { ACTIONS } from "./const/const";
 
 function reducer(state, { type, payload }) {
   switch (type) {

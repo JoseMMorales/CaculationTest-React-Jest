@@ -1,4 +1,4 @@
-import { ACTIONS } from "../App";
+import { ACTIONS } from "../const/const";
 
 export default function DigitButton({ dispatch, digit }) {
   return (
