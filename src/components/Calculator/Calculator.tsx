@@ -3,11 +3,13 @@ import "./Calculator.css";
 
 import DigitButton from "../DigitButton/DigitButton";
 import OperationButton from "../OperationButton/OperationButton";
-import { ACTIONS } from "../../const/const";
+import { Action } from "../../const/const";
+import { IState } from "../../model/state.interface";
+import { ActionReducer } from "../../model/reducer.interface";
 
-function reducer(state, { type, payload }) {
+const reducer = (state:IState , { type, payload }: ActionReducer) => {
   switch (type) {
-    case ACTIONS.ADD_DIGIT:
+    case Action.ADD_DIGIT:
       if (state.overwrite) {
         return {
           ...state,
@@ -29,7 +31,7 @@ function reducer(state, { type, payload }) {
         ...state,
         currentOperand: `${state.currentOperand || ""}${payload.digit}`,
       };
-    case ACTIONS.CHOOSE_OPERATION:
+    case Action.CHOOSE_OPERATION:
       if (state.currentOperand == null && state.previousOperand == null) {
         return state;
       }
@@ -56,9 +58,9 @@ function reducer(state, { type, payload }) {
         operation: payload.operation,
         currentOperand: null,
       };
-    case ACTIONS.CLEAR:
+    case Action.CLEAR:
       return {};
-    case ACTIONS.DELETE_DIGIT:
+    case Action.DELETE_DIGIT:
       if (state.overwrite) {
         return {
           ...state,
@@ -75,7 +77,7 @@ function reducer(state, { type, payload }) {
         ...state,
         currentOperand: state.currentOperand.slice(0, -1),
       };
-    case ACTIONS.EVALUATE:
+    case Action.EVALUATE:
       if (
         state.operation == null ||
         state.currentOperand == null ||
@@ -94,12 +96,12 @@ function reducer(state, { type, payload }) {
   }
 }
 
-function evaluate({ currentOperand, previousOperand, operation }) {
-  const prev = parseFloat(previousOperand);
-  const current = parseFloat(currentOperand);
+const evaluate = ({ currentOperand, previousOperand, operation }: IState): string => {
+  const prev: number = parseFloat(previousOperand);
+  const current: number = parseFloat(currentOperand);
 
   if (isNaN(prev) || isNaN(current)) return "";
-  let computation = "";
+  let computation: number = 0;
 
   switch (operation) {
     case "+":
@@ -120,20 +122,24 @@ function evaluate({ currentOperand, previousOperand, operation }) {
 }
 
 const INTEGER_FORMATTER = new Intl.NumberFormat("en-us", {
-  maximumFractiionDigits: 0,
+  maximumFractionDigits: 0,
 });
-function formatOperand(operand) {
+const formatOperand = (operand) => {
   if (operand == null) return;
   const [integer, decimal] = operand.split(".");
   if (decimal == null) return INTEGER_FORMATTER.format(integer);
   return `${INTEGER_FORMATTER.format(integer)}.${decimal}`;
 }
 
-function Calculator() {
-  const [{ currentOperand, previousOperand, operation }, dispatch] = useReducer(
-    reducer,
-    {}
-  );
+const initialState = {
+  overwrite: true, 
+  currentOperand: "", 
+  previousOperand: "", 
+  operation: "",
+};
+
+const Calculator = () => {
+  const [{ currentOperand, previousOperand, operation }, dispatch] = useReducer(reducer,initialState);
 
   return (
     <div className="calculator-grid">
@@ -145,11 +151,11 @@ function Calculator() {
       </div>
       <button
         className="span-two"
-        onClick={() => dispatch({ type: ACTIONS.CLEAR })}
+        onClick={() => dispatch({ type: Action.CLEAR })}
       >
         AC
       </button>
-      <button onClick={() => dispatch({ type: ACTIONS.DELETE_DIGIT })}>
+      <button onClick={() => dispatch({ type: Action.DELETE_DIGIT })}>
         DEL
       </button>
       <OperationButton operation="/" dispatch={dispatch} />
@@ -169,7 +175,7 @@ function Calculator() {
       <DigitButton digit="0" dispatch={dispatch} />
       <button
         className="span-two"
-        onClick={() => dispatch({ type: ACTIONS.EVALUATE })}
+        onClick={() => dispatch({ type: Action.EVALUATE })}
       >
         =
       </button>

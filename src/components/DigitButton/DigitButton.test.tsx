@@ -1,12 +1,14 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import DigitButton from "./DigitButton";
-import { ACTIONS } from "../../const/const";
+import { Action } from "../../const/const";
+import { IDispatch } from "../../model/dispatch.interface";
+
 
 test("render DigitButton content", () => {
-  const digit = "0";
-  const dispatch = {
-    type: ACTIONS.ADD_DIGIT,
+  const digit: string = "0";
+  const dispatch:IDispatch = {
+    type: Action.ADD_DIGIT,
     payload: "0",
   };
 
