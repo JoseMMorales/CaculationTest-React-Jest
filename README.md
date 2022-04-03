@@ -1,70 +1,27 @@
-# Getting Started with Create React App
+## <img src="https://raw.githubusercontent.com/alDuncanson/react-hooks-snippets/master/icon.png" width="50"/><img src="https://miro.medium.com/max/816/1*mn6bOs7s6Qbao15PMNRyOA.png" width="50"/><img src="https://ih1.redbubble.net/image.404020079.1876/st,small,507x507-pad,600x600,f8f8f8.u7.jpg" width="50"/> Calculator ReactJs/Hooks/Typescript/Jest
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This Calculator app is a modern style app which provides a standard calculator functionality, it is written in [ReactJS](https://reactjs.org/docs/introducing-jsx.html) letting us split UI components, flexible, easy to update and maintain due to its modular structure. As state logic of these calculations and functionalities are quite complex, I decided to use [Hooks](https://reactjs.org/docs/hooks-reference.html) for a better optimization in performance for component. To make sure errors/bugs are being caught at build time, long before the app goes live we implement the project installing [Typescript](https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html), and finally unit testing is running thanks to [Jest](https://jestjs.io/docs/tutorial-react) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) for UI demonstrate that rendering is successfully done.   
+### SRC Structure...
+<div align="center">
 
-## Available Scripts
+![Screenshot 2022-04-03 at 18 34 31](https://user-images.githubusercontent.com/43299285/161438210-dbc53d4f-a8c8-4569-b221-8809482ef7a8.png)
 
-In the project directory, you can run:
+</div>
 
-### `yarn start`
+### Dependencies Installed...
+* "@testing-library/jest-dom": "^5.16.3",
+* "@testing-library/react": "^13.0.0",
+* "@testing-library/user-event": "^14.0.4",
+* "@types/jest": "^27.4.1",
+* "@types/node": "^17.0.23",
+* "@types/react": "^17.0.43",
+* "@types/react-dom": "^17.0.14",
+* "typescript": "^4.6.3"
+### Installation:
+* `git clone https://github.com/JoseMMorales/CaculationTest-React-Jest.git`
+* `cd CaculationTest-React-Jest.git`
+* `npm install`
+* `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Author:
+Jose MMorales

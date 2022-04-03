@@ -13,15 +13,15 @@ const reducer = (state:IState , { type, payload }: ActionReducer) => {
       if (state.overwrite) {
         return {
           ...state,
-          currentOperand: payload.digit,
+          currentOperand: payload && payload.digit,
           overwrite: false,
         };
       }
-      if (payload.digit === "0" && state.currentOperand === "0") {
+      if ((((payload && payload.digit) === "0") && state.currentOperand) === "0") {
         return state;
       }
       if (
-        payload.digit === "." &&
+        ((payload && payload.digit) === ".") &&
         (!state.currentOperand || state.currentOperand.includes("."))
       ) {
         return state;
@@ -29,7 +29,7 @@ const reducer = (state:IState , { type, payload }: ActionReducer) => {
 
       return {
         ...state,
-        currentOperand: `${state.currentOperand || ""}${payload.digit}`,
+        currentOperand: `${state.currentOperand || ""}${payload && payload.digit}`,
       };
     case Action.CHOOSE_OPERATION:
       if (state.currentOperand == null && state.previousOperand == null) {
@@ -39,14 +39,14 @@ const reducer = (state:IState , { type, payload }: ActionReducer) => {
       if (state.currentOperand == null) {
         return {
           ...state,
-          operation: payload.operation,
+          operation: payload && payload.operation,
         };
       }
 
       if (state.previousOperand == null) {
         return {
           ...state,
-          operation: payload.operation,
+          operation: payload && payload.operation,
           previousOperand: state.currentOperand,
           currentOperand: null,
         };
@@ -55,7 +55,7 @@ const reducer = (state:IState , { type, payload }: ActionReducer) => {
       return {
         ...state,
         previousOperand: evaluate(state),
-        operation: payload.operation,
+        operation: payload && payload.operation,
         currentOperand: null,
       };
     case Action.CLEAR:
@@ -124,7 +124,7 @@ const evaluate = ({ currentOperand, previousOperand, operation }: IState): strin
 const INTEGER_FORMATTER = new Intl.NumberFormat("en-us", {
   maximumFractionDigits: 0,
 });
-const formatOperand = (operand) => {
+const formatOperand = (operand: { split: (arg0: string) => [any, any]; } | null) => {
   if (operand == null) return;
   const [integer, decimal] = operand.split(".");
   if (decimal == null) return INTEGER_FORMATTER.format(integer);

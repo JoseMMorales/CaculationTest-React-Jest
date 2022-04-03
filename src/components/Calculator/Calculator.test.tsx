@@ -1,15 +1,13 @@
-import React from "react";
 import Calculator from "./Calculator";
 
 describe("Calculator", () => {
-  let component;
+  let component: JSX.Element;
 
   beforeEach(() => {
     component = <Calculator />;
   });
 
   test("render Calculator component", () => {
-    expect(component.container).toContainHTML;
+    expect(component).toContainHTML;
   });
 });
-
