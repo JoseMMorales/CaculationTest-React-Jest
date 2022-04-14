@@ -1,5 +1,5 @@
 export interface IDispatch {
-  dispatch? : any,
+  dispatch?: any,
   type?: string,
   payload?: string,
   operation?: string,

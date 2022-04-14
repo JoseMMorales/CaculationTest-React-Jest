@@ -1,4 +1,4 @@
-import React from "react";
+import { Dispatch } from "react";
 import { render } from "@testing-library/react";
 import DigitButton from "./DigitButton";
 import { Action } from "../../const/const";

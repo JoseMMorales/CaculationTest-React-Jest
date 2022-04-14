@@ -1,9 +1,8 @@
 import { ReactElement } from "react";
 import { Action } from "../../const/const";
-import { ComponentProps } from "../../model/component.interface";
-import { DispatchProps } from "../../model/dispatchProps.interface";
+import { IDispatch } from "../../model/dispatch.interface";
 
-const DigitButton = ({ dispatch, digit }: DispatchProps): ReactElement<ComponentProps> => {
+const DigitButton = ({ dispatch, digit }: IDispatch): ReactElement<IDispatch> => {
   return (
     <button
       onClick={() => dispatch({ type: Action.ADD_DIGIT, payload: { digit } })}

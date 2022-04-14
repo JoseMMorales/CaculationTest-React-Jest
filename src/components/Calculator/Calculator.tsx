@@ -7,21 +7,21 @@ import { Action } from "../../const/const";
 import { IState } from "../../model/state.interface";
 import { ActionReducer } from "../../model/reducer.interface";
 
-const reducer = (state:IState , { type, payload }: ActionReducer) => {
-  switch (type) {
+const reducer = (state: any, action: ActionReducer) => {
+  switch (action.type) {
     case Action.ADD_DIGIT:
       if (state.overwrite) {
         return {
           ...state,
-          currentOperand: payload && payload.digit,
+          currentOperand: action.payload && action.payload.digit,
           overwrite: false,
         };
       }
-      if ((((payload && payload.digit) === "0") && state.currentOperand) === "0") {
+      if ((((action.payload && action.payload.digit) === "0") && state.currentOperand) === "0") {
         return state;
       }
       if (
-        ((payload && payload.digit) === ".") &&
+        ((action.payload && action.payload.digit) === ".") &&
         (!state.currentOperand || state.currentOperand.includes("."))
       ) {
         return state;
@@ -29,7 +29,7 @@ const reducer = (state:IState , { type, payload }: ActionReducer) => {
 
       return {
         ...state,
-        currentOperand: `${state.currentOperand || ""}${payload && payload.digit}`,
+        currentOperand: `${state.currentOperand || ""}${action.payload && action.payload.digit}`,
       };
     case Action.CHOOSE_OPERATION:
       if (state.currentOperand == null && state.previousOperand == null) {
@@ -39,14 +39,14 @@ const reducer = (state:IState , { type, payload }: ActionReducer) => {
       if (state.currentOperand == null) {
         return {
           ...state,
-          operation: payload && payload.operation,
+          operation: action.payload && action.payload.operation,
         };
       }
 
       if (state.previousOperand == null) {
         return {
           ...state,
-          operation: payload && payload.operation,
+          operation: action.payload && action.payload.operation,
           previousOperand: state.currentOperand,
           currentOperand: null,
         };
@@ -55,7 +55,7 @@ const reducer = (state:IState , { type, payload }: ActionReducer) => {
       return {
         ...state,
         previousOperand: evaluate(state),
-        operation: payload && payload.operation,
+        operation: action.payload && action.payload.operation,
         currentOperand: null,
       };
     case Action.CLEAR:
@@ -96,14 +96,14 @@ const reducer = (state:IState , { type, payload }: ActionReducer) => {
   }
 }
 
-const evaluate = ({ currentOperand, previousOperand, operation }: IState): string => {
-  const prev: number = parseFloat(previousOperand);
-  const current: number = parseFloat(currentOperand);
+const evaluate = (state: IState): string => {
+  const prev: number = parseFloat(state.previousOperand);
+  const current: number = parseFloat(state.currentOperand);
 
   if (isNaN(prev) || isNaN(current)) return "";
   let computation: number = 0;
 
-  switch (operation) {
+  switch (state.operation) {
     case "+":
       computation = prev + current;
       break;
@@ -124,30 +124,29 @@ const evaluate = ({ currentOperand, previousOperand, operation }: IState): strin
 const INTEGER_FORMATTER = new Intl.NumberFormat("en-us", {
   maximumFractionDigits: 0,
 });
-const formatOperand = (operand: { split: (arg0: string) => [any, any]; } | null) => {
+const formatOperand = (operand: { split: (arg0: string) => [any, any]; }) => {
   if (operand == null) return;
   const [integer, decimal] = operand.split(".");
   if (decimal == null) return INTEGER_FORMATTER.format(integer);
   return `${INTEGER_FORMATTER.format(integer)}.${decimal}`;
 }
 
-const initialState = {
-  overwrite: true, 
+const initialState: IState = {
   currentOperand: "", 
   previousOperand: "", 
   operation: "",
 };
 
 const Calculator = () => {
-  const [{ currentOperand, previousOperand, operation }, dispatch] = useReducer(reducer,initialState);
+  const [state, dispatch] = useReducer(reducer,initialState);
 
   return (
     <div className="calculator-grid">
       <div className="output">
         <div className="previous-operand">
-          {formatOperand(previousOperand)} {operation}
+          {formatOperand(state.previousOperand)} {state.operation}
         </div>
-        <div className="current-operand">{formatOperand(currentOperand)}</div>
+        <div className="current-operand">{formatOperand(state.currentOperand)}</div>
       </div>
       <button
         className="span-two"
